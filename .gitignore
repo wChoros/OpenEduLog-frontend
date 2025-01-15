@@ -46,3 +46,4 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+.react-router
