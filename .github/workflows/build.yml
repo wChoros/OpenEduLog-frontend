@@ -17,3 +17,9 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Install Dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
+      - name: Run Prettier Check
+        run: npm run format:check
