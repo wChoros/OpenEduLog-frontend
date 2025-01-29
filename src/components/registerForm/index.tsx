@@ -1,4 +1,4 @@
-import "./style.sass"
+import './style.sass'
 
 const registerForm = () => {
    return (
