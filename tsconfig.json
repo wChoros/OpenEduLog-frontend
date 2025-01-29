@@ -9,9 +9,9 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "dist"]
