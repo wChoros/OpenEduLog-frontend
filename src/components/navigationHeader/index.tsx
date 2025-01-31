@@ -9,13 +9,13 @@ const navigationHeader = () => {
          </div>
          <nav>
             <div className={'navRecord'}>
-               <a href={'#'}>Home</a>
+               <a href={'/home'}>Home</a>
             </div>
             <div className={'navRecord'}>
-               <a href={'#'}>About</a>
+               <a href={'/about'}>About</a>
             </div>
             <div className={'navRecord'}>
-               <a href={'#'}>Contact</a>
+               <a href={'/contact'}>Contact</a>
             </div>
             <div className={'navRecord'}>
                <a href={'login'}>Login</a>

@@ -17,9 +17,9 @@ const LoginForm = () => {
          login: formData.get('username'),
          password: formData.get('password'),
       }
-      // @ts-ignore
-      const apiUrl = import.meta.env.VITE_API_URL
       try {
+         // @ts-ignore
+         const apiUrl = import.meta.env.VITE_API_URL
          const response = await fetch(`${apiUrl}/auth/login`, {
             method: 'POST',
             headers: {
