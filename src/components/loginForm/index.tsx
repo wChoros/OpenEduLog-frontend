@@ -17,7 +17,8 @@ const LoginForm = () => {
          login: formData.get('username'),
          password: formData.get('password'),
       }
-      const apiUrl = import.meta.env.VITE_API_URL;
+      // @ts-ignore
+      const apiUrl = import.meta.env.VITE_API_URL
       try {
          const response = await fetch(`${apiUrl}/auth/login`, {
             method: 'POST',
@@ -33,7 +34,7 @@ const LoginForm = () => {
             console.log('Login successful:', result)
             setErrorMessage(null) // Clear any previous error messages
 
-            const roleCookie = document.cookie.split('; ').find(row => row.startsWith('role='))
+            const roleCookie = document.cookie.split('; ').find((row) => row.startsWith('role='))
             if (roleCookie) {
                const role = roleCookie.split('=')[1]
                if (role === 'ADMIN') {

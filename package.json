@@ -10,8 +10,8 @@
       "lint:fix": "eslint src --fix",
       "test": "vitest",
       "preview": "vite preview",
-      "prettier": "prettier --write './*.{js,ts,jsx,tsx,json,sass,scss,css}'",
-      "prettier:check": "prettier --check 'src/**/*.{js,ts,jsx,tsx,json}'"
+      "prettier": "prettier --write './**/*.{js,ts,jsx,tsx,json}'",
+      "prettier:check": "prettier --check './**/*.{js,ts,jsx,tsx,json}'"
    },
    "dependencies": {
       "@react-router/node": "^7.1.3",
