@@ -1,3 +1,4 @@
+//@ts-ignore
 import './style.sass'
 
 const registerForm = () => {
