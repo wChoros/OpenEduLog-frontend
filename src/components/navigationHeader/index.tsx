@@ -9,7 +9,7 @@ const navigationHeader = () => {
          </div>
          <nav>
             <div className={'navRecord'}>
-               <a href={'/home'}>Home</a>
+               <a href={'/'}>Home</a>
             </div>
             <div className={'navRecord'}>
                <a href={'/about'}>About</a>

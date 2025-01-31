@@ -14,7 +14,9 @@ const LoginForm = () => {
       const form = event.target as HTMLFormElement
       const formData = new FormData(form)
       const data = {
-         login: formData.get('username'),
+         // it's either login or email in the api, so we use the same value for both depending on the input
+         login: formData.get('login'),
+         email: formData.get('login'),
          password: formData.get('password'),
       }
       try {
@@ -63,7 +65,7 @@ const LoginForm = () => {
    return (
       <form id="loginForm" onSubmit={handleSubmit}>
          <h2>Login</h2>
-         <input type="text" name="username" placeholder="Username" required />
+         <input type="text" name="login" placeholder="Username or Email" required />
          <input type="password" name="password" placeholder="Password" required />
          <button type="submit">Login</button>
          <p className="error-message">{errorMessage}</p>
