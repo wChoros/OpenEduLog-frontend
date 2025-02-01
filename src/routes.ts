@@ -6,4 +6,5 @@ export default [
    route('login', 'pages/login.tsx'),
    route('register', 'pages/register.tsx'),
    route('*', 'catchall.tsx'),
+   route('/dashboard/student', 'pages/studentDashboard.tsx'),
 ] satisfies RouteConfig
