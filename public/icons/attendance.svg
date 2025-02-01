@@ -1,151 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="100mm"
-   height="100mm"
-   viewBox="0 0 100 100"
-   version="1.1"
-   id="svg1"
-   sodipodi:docname="attendance.svg"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#505050"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     inkscape:document-units="px"
-     inkscape:zoom="1.526922"
-     inkscape:cx="44.534037"
-     inkscape:cy="181.08325"
-     inkscape:window-width="2048"
-     inkscape:window-height="1083"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <rect
-       style="fill:#000000;stroke-width:0.447756;fill-opacity:1"
-       id="rect1"
-       width="95.889862"
-       height="95.303375"
-       x="2.0550685"
-       y="3.2147045"
-       ry="22.387821"
-       rx="22.387821" />
-    <g
-       id="g2"
-       transform="matrix(1.1363636,0,0,1.1363636,-6.6212727,1.798504)">
-      <rect
-         style="fill:#ffffff;stroke-width:0.316237"
-         id="rect2-72"
-         width="55.449245"
-         height="4.6785297"
-         x="129.75681"
-         y="65.789948"
-         rx="3.7797618"
-         ry="2.6458333" />
-    </g>
-    <circle
-       style="fill:#ffffff;stroke-width:0.264583"
-       id="path2"
-       cx="16.781384"
-       cy="16.781384"
-       r="3.552217" />
-    <rect
-       style="fill:#ffffff;stroke-width:0.247409"
-       id="rect4"
-       width="55.969074"
-       height="62.726955"
-       x="22.015463"
-       y="18.636522"
-       rx="3.96875"
-       ry="3.96875" />
-    <rect
-       style="fill:#000000;stroke-width:0.203188"
-       id="rect5"
-       width="3.8121352"
-       height="40.54726"
-       x="-59.434658"
-       y="29.72637"
-       rx="1.3229166"
-       ry="1.5249383"
-       transform="rotate(-90)" />
-    <rect
-       style="fill:#000000;stroke-width:0.203188"
-       id="rect5-6"
-       width="3.8121352"
-       height="40.54726"
-       x="-65.12851"
-       y="29.72637"
-       rx="1.3229166"
-       ry="1.5249383"
-       transform="rotate(-90)" />
-    <rect
-       style="fill:#000000;stroke-width:0.203188"
-       id="rect5-61"
-       width="3.8121352"
-       height="40.54726"
-       x="-70.822365"
-       y="29.72637"
-       rx="1.3229166"
-       ry="1.5249383"
-       transform="rotate(-90)" />
-    <g
-       id="g6"
-       transform="translate(-1.7968369,3.9944573)">
-      <rect
-         style="fill:#000000;stroke-width:0.334144"
-         id="rect6"
-         width="21.833139"
-         height="2.5991833"
-         x="2.2457926"
-         y="62.216095"
-         rx="1.3229166"
-         ry="1.3229166"
-         transform="rotate(-46.449162)" />
-      <rect
-         style="fill:#000000;stroke-width:0.236275"
-         id="rect6-8"
-         width="10.91657"
-         height="2.5991833"
-         x="53.906582"
-         y="2.062726"
-         rx="1.3229166"
-         ry="1.3229166"
-         transform="rotate(37.318094)" />
-    </g>
-    <rect
-       style="fill:#000000;stroke-width:0.264583;fill-opacity:0"
-       id="rect7"
-       width="24.432322"
-       height="9.703618"
-       x="37.08168"
-       y="18.367561"
-       rx="1.3229166"
-       ry="1.3229166" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.32292;stroke-dasharray:none;stroke-opacity:1"
-       id="rect8"
-       width="19.580513"
-       height="12.649358"
-       x="40.209743"
-       y="12.964384"
-       rx="1.3229166"
-       ry="1.3229166" />
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100.4 100.4" style="enable-background:new 0 0 100.4 100.4;" xml:space="preserve">
+<g>
+	<path d="M79.1,10.1H63.2V3.3c0-0.8-0.7-1.5-1.5-1.5H38c-0.8,0-1.5,0.7-1.5,1.5v6.8H19.7c-3.5,0-6.3,2.8-6.3,6.3v75.4
+		c0,3.5,2.8,6.3,6.3,6.3h59.5c3.5,0,6.3-2.8,6.3-6.3V16.4C85.4,12.9,82.6,10.1,79.1,10.1z M38,29.5h23.7c0.8,0,1.5-0.7,1.5-1.5v-6.5
+		h10.5v64.7H25.1V21.6h11.4V28C36.5,28.9,37.2,29.5,38,29.5z M60.2,4.8V20c0,0,0,0,0,0s0,0,0,0v6.5H39.5v-6.5c0,0,0,0,0,0s0,0,0,0
+		v-8.5c0,0,0,0,0,0s0,0,0,0V4.8L60.2,4.8L60.2,4.8z M82.4,91.7c0,1.8-1.5,3.3-3.3,3.3H19.7c-1.8,0-3.3-1.5-3.3-3.3V16.4
+		c0-1.8,1.5-3.3,3.3-3.3h16.8v5.5H23.6c-0.8,0-1.5,0.7-1.5,1.5v67.7c0,0.8,0.7,1.5,1.5,1.5h51.6c0.8,0,1.5-0.7,1.5-1.5V20.1
+		c0-0.8-0.7-1.5-1.5-1.5h-12v-5.5h15.9c1.8,0,3.3,1.5,3.3,3.3V91.7z"/>
+	<path d="M28.8,46.4c0,0.8,0.7,1.5,1.5,1.5h38.5c0.8,0,1.5-0.7,1.5-1.5s-0.7-1.5-1.5-1.5H30.3C29.5,44.9,28.8,45.6,28.8,46.4z"/>
+	<path d="M68.8,55.4H30.3c-0.8,0-1.5,0.7-1.5,1.5s0.7,1.5,1.5,1.5h38.5c0.8,0,1.5-0.7,1.5-1.5S69.6,55.4,68.8,55.4z"/>
+	<path d="M68.8,66.4H30.3c-0.8,0-1.5,0.7-1.5,1.5c0,0.8,0.7,1.5,1.5,1.5h38.5c0.8,0,1.5-0.7,1.5-1.5C70.3,67.1,69.6,66.4,68.8,66.4z
+		"/>
+</g>
 </svg>
