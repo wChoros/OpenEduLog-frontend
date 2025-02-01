@@ -98,14 +98,16 @@ const Index: React.FC = () => {
                            <td>{subjectName}</td>
                            <td>
                               {grades.map((grade) => (
-                                 <div
-                                    key={grade.id}
-                                    className={`grade ${getGradeClass(grade.value)}`}
-                                 >
-                                    <a href={`/dashboard/student/grades/${grade.id}`}>
-                                       {grade.value}
-                                    </a>
-                                 </div>
+                                 <>
+                                    <div
+                                       key={grade.id}
+                                       className={`grade ${getGradeClass(grade.value)}`}
+                                    >
+                                       <a href={`/dashboard/student/grades/${grade.id}`}>
+                                          {grade.value}
+                                       </a>
+                                    </div>
+                                 </>
                               ))}
                            </td>
                            <td>

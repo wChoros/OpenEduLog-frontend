@@ -37,7 +37,7 @@
 
           th
             font-size: 20px
-            font-weight: normal
+            font-weight: lighter
 
             &:nth-of-type(2)
               justify-content: center
@@ -51,14 +51,21 @@
           td
             border-bottom: 1px solid variables.$accent-light-gray
             text-align: center
+            font-weight: lighter
+            min-height: 100px
+
 
             &:nth-of-type(1)
               width: 15%
 
+
             &:nth-of-type(2)
               display: flex
               flex-wrap: wrap
+              justify-content: flex-start
+              align-items: center
               width: 100%
+              font-weight: normal
 
             &:nth-of-type(3)
               width: 20%
@@ -68,8 +75,6 @@
               height: 25px
               margin: 5px
               border-radius: 50%
-
-
               a
                 display: flex
                 align-items: center

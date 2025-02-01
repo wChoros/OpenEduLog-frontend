@@ -8,6 +8,7 @@ export default [
    route('/dashboard/student', 'pages/studentDashboard/index.tsx', [
       index('pages/studentDashboard/overview.tsx'),
       route('mail', 'pages/studentDashboard/mail.tsx'),
+      route('timetable/:weekNumber?', 'pages/studentDashboard/timetable.tsx'),
       route('grades', 'pages/studentDashboard/grades.tsx', [
          index('components/bigGradesView/index.tsx'),
          route(':gradeId', 'components/gradeDetails/index.tsx'),

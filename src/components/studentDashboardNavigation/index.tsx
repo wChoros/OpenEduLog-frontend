@@ -11,6 +11,7 @@ const studentDashboardNavigation = (props: Props) => {
       <>
          <nav id={'studentDashboardNavigation'}>
             <header id={'studentDashboardHeader'}>
+               <img src="/logos/logo-black-horizontal.png" alt="OpenEduLog" />
                <h2>Student's Panel</h2>
                <h3>{props.studentName}</h3>
                <h4>{props.schoolName}</h4>
@@ -31,6 +32,12 @@ const studentDashboardNavigation = (props: Props) => {
                <a href={'/dashboard/student/grades'}>
                   <img src={'/icons/grades.svg'} alt={'grades'} />
                   <span>Grades</span>
+               </a>
+            </div>
+            <div className={'navRecord'}>
+               <a href={'/dashboard/student/timetable'}>
+                  <img src={'/icons/timetable.svg'} alt={'timetable'} />
+                  <span>Timetable</span>
                </a>
             </div>
             <div className={'navRecord'}>
