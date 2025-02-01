@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 // @ts-ignore
 import './style.sass'
 
-
 const slides: string[] = [
    '../../../slider/slide1.jpg',
    '../../../slider/slide2.jpg',
    '../../../slider/slide3.jpg',
 ]
-
 
 const HomeBanner = () => {
    const [currentSlide, setCurrentSlide] = useState(0)

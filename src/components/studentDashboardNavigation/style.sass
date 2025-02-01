@@ -1,12 +1,16 @@
 @use '../../../public/styles/variables.sass'
 
 #studentDashboardNavigation
-  width: 300px
+  margin: 0
+  min-width: 300px
+  width: 15%
+  min-height: 100vh
   height: 100%
   display: flex
   flex-direction: column
   align-items: center
   box-shadow: variables.$strong-shadow
+  z-index: 100
 
   #studentDashboardHeader
     width: 100%
@@ -44,6 +48,7 @@
       height: 100%
       display: flex
       color: black
+      transition: 0.3s
 
       &:hover
         color: variables.$accent-deep-orange

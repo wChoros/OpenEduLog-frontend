@@ -6,7 +6,6 @@ interface Props {
    schoolName: string
 }
 
-
 const studentDashboardNavigation = (props: Props) => {
    return (
       <>
