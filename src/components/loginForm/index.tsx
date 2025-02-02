@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom'
 // @ts-ignore
 import './style.sass'
 
-const LoginForm = () => {
+const LoginForm = (props: Readonly<{ message: string }>) => {
    const [errorMessage, setErrorMessage] = useState<string | null>(null)
    const navigate = useNavigate()
+   if (props.message) {
+      setErrorMessage(props.message)
+   }
 
    const handleSubmit = async (event: FormEvent) => {
       event.preventDefault()

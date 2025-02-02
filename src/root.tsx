@@ -1,6 +1,6 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
-export function Layout({ children }: { children: Readonly<React.ReactNode> }) {
+export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
    return (
       <html lang="en">
          <head>
