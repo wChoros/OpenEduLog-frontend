@@ -1,5 +1,3 @@
 export default function Page() {
-   return (
-      <h1>Student Dashboard Overview</h1>
-   )
+   return <h1>Student Dashboard Overview</h1>
 }

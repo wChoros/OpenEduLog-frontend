@@ -70,9 +70,8 @@ const Index: React.FC = () => {
          window.location.pathname.endsWith('/dashboard/student/timetable/')
       ) {
          weekNumber = getCurrentWeekNumber()
-      }      
-      else {
-         const weekNumberString =  window.location.pathname.split('/').pop()
+      } else {
+         const weekNumberString = window.location.pathname.split('/').pop()
          weekNumber = weekNumberString ? parseInt(weekNumberString) : getCurrentWeekNumber()
       }
 
