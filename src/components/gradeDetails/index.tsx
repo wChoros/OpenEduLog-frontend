@@ -60,7 +60,7 @@ const Index: React.FC = () => {
             </header>
             {gradesData.map((grade) => (
                <div key={grade.id} className="gradeRecord">
-                  <table>
+                  <table aria-hidden={true}>
                      <tbody>
                         <tr>
                            <td>Subject:</td>

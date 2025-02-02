@@ -52,21 +52,30 @@ interface TimetableItem {
    subjectOnTeacher: SubjectOnTeacher
 }
 
+const getCurrentWeekNumber = () => {
+   const today = new Date()
+   const firstDayOfYear = new Date(today.getFullYear(), 0, 1)
+   const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000
+   return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7)
+}
+
 const Index: React.FC = () => {
    const [timetableData, setTimetableData] = useState<TimetableItem[]>([])
-   // get week number from url (will be at the end of the url)
-   if (
-      window.location.pathname.endsWith('/dashboard/student/timetable') ||
-      window.location.pathname.endsWith('/dashboard/student/timetable/')
-   ) {
-      const today = new Date()
-      const firstDayOfYear = new Date(today.getFullYear(), 0, 1)
-      const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000
-      const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7)
-      window.location.href = `/dashboard/student/timetable/${weekNumber}`
-   }
 
    useEffect(() => {
+      let weekNumber: number
+      // get week number from url (will be at the end of the url)
+      if (
+         window.location.pathname.endsWith('/dashboard/student/timetable') ||
+         window.location.pathname.endsWith('/dashboard/student/timetable/')
+      ) {
+         weekNumber = getCurrentWeekNumber()
+      }      
+      else {
+         const weekNumberString =  window.location.pathname.split('/').pop()
+         weekNumber = weekNumberString ? parseInt(weekNumberString) : getCurrentWeekNumber()
+      }
+
       // Get userId from cookie
       const userIdCookie = document.cookie.split('; ').find((row) => row.startsWith('user_id='))
       const userId = userIdCookie ? userIdCookie.split('=')[1] : null
@@ -75,7 +84,6 @@ const Index: React.FC = () => {
       const apiUrl = import.meta.env.VITE_API_URL
 
       // get week number from url
-      const weekNumber = window.location.pathname.split('/').pop()
 
       fetch(`${apiUrl}/timetables/user/${userId}/${weekNumber}`, {
          method: 'GET',

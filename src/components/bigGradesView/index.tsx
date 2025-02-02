@@ -76,53 +76,49 @@ const Index: React.FC = () => {
          acc[grade.subjectName].push(grade)
          return acc
       },
-      {} as Record<string, GradeData[]>
+      {} as Record<string, GradeData[]>,
    )
 
    return (
-      <>
-         <section id="bigGradesView">
-            <h1 className="dashboardSectionTitle">Grades</h1>
-            <div className="gradesContainer">
-               <table>
-                  <thead>
-                     <tr>
-                        <th>Course</th>
-                        <th>Partial Grades</th>
-                        <th>Average</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {Object.entries(groupedGrades).map(([subjectName, grades]) => (
-                        <tr key={subjectName}>
-                           <td>{subjectName}</td>
-                           <td>
-                              {grades.map((grade) => (
-                                 <>
-                                    <div
-                                       key={grade.id}
-                                       className={`grade ${getGradeClass(grade.value)}`}
-                                    >
-                                       <a href={`/dashboard/student/grades/${grade.id}`}>
-                                          {grade.value}
-                                       </a>
-                                    </div>
-                                 </>
-                              ))}
-                           </td>
-                           <td>
-                              {(
-                                 grades.reduce((acc, g) => acc + g.value * g.weight, 0) /
-                                 grades.reduce((acc, g) => acc + g.weight, 0)
-                              ).toFixed(2)}
-                           </td>
-                        </tr>
-                     ))}
-                  </tbody>
-               </table>
-            </div>
-         </section>
-      </>
+      <section id="bigGradesView">
+         <h1 className="dashboardSectionTitle">Grades</h1>
+         <div className="gradesContainer">
+            <table>
+               <thead>
+               <tr>
+                  <th>Course</th>
+                  <th>Partial Grades</th>
+                  <th>Average</th>
+               </tr>
+               </thead>
+               <tbody>
+               {Object.entries(groupedGrades).map(([subjectName, grades]) => (
+                  <tr key={subjectName}>
+                     <td>{subjectName}</td>
+                     <td>
+                        {grades.map((grade) => (
+                           <div
+                              key={grade.id}
+                              className={`grade ${getGradeClass(grade.value)}`}
+                           >
+                              <a href={`/dashboard/student/grades/${grade.id}`}>
+                                 {grade.value}
+                              </a>
+                           </div>
+                        ))}
+                     </td>
+                     <td>
+                        {(
+                           grades.reduce((acc, g) => acc + g.value * g.weight, 0) /
+                           grades.reduce((acc, g) => acc + g.weight, 0)
+                        ).toFixed(2)}
+                     </td>
+                  </tr>
+               ))}
+               </tbody>
+            </table>
+         </div>
+      </section>
    )
 }
 
