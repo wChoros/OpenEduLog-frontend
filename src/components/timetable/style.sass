@@ -101,11 +101,6 @@
               text-align: center
               padding: 0
 
-              &.cancelled
-                span
-                  text-decoration: line-through
-                  color: red
-                  font-weight: normal
 
               &:nth-of-type(1)
                 width: 6%
@@ -122,5 +117,13 @@
                 margin-top: 5px
                 font-size: 15px
                 font-weight: lighter
+
               .substitution
                 color: variables.$accent-light-orange
+            td.canceled span
+              text-decoration: line-through
+              color: red
+              &.subjectName
+                font-weight: normal
+              &.teacherName
+                font-weight: lighter

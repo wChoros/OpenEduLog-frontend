@@ -116,52 +116,57 @@ const Index: React.FC = () => {
             <div className="timetableContainer">
                <table>
                   <thead>
-                  <tr>
-                     <th>Lesson</th>
-                     {daysOfWeek.map((day) => (
-                        <th key={day}>{day}</th>
-                     ))}
-                  </tr>
+                     <tr>
+                        <th>Lesson</th>
+                        {daysOfWeek.map((day) => (
+                           <th key={day}>{day}</th>
+                        ))}
+                     </tr>
                   </thead>
                   <tbody>
-                  {totalLessons.map((lessonNumber) => (
-                     <tr key={lessonNumber}>
-                        <td>Lesson {lessonNumber}</td>
-                        {daysOfWeek.map((day) => {
-                           const entry = timetableData.find(
-                              (item) => item.weekDay === day && item.lessonNumber === lessonNumber,
-                           )
-                           return (
-                                 <td key={day} className={entry && entry.isCanceled ? 'canceled' : ''}>
-                                 {entry ? (
-                                    <>
-                                       <span className="subjectName">
-                                          {entry.subjectOnTeacher.subject.name}
-                                       </span>
-                                       <br />
-                                       {entry.substitutionTeacher ? (
-                                          <>
-                                             <span className="teacherName, substitution">
-                                                {entry.substitutionTeacher.firstName}{' '}
-                                                {entry.substitutionTeacher.lastName}
-                                             </span>
-                                          </>
-                                       ) : (
-                                          <>
-                                             <span className="teacherName">
-                                                {entry.subjectOnTeacher.teacher.firstName}{' '}
-                                                {entry.subjectOnTeacher.teacher.lastName}
-                                             </span>
-                                          </>
-                                       )}
-
-                                    </>
-                                 ) : null}
-                              </td>
-                           )
-                        })}
-                     </tr>
-                  ))}
+                     {totalLessons.map((lessonNumber) => (
+                        <tr key={lessonNumber}>
+                           <td>Lesson {lessonNumber}</td>
+                           {daysOfWeek.map((day) => {
+                              const entry = timetableData.find(
+                                 (item) =>
+                                    item.weekDay === day && item.lessonNumber === lessonNumber
+                              )
+                              return (
+                                 <td
+                                    key={day}
+                                    className={entry && entry.isCanceled ? 'canceled' : ''}
+                                 >
+                                    {entry ? (
+                                       <>
+                                          <span
+                                             className={`subjectName ${entry && entry.isCanceled ? 'canceled' : ''}`}
+                                          >
+                                             {entry.subjectOnTeacher.subject.name}
+                                          </span>
+                                          <br />
+                                          {entry.substitutionTeacher ? (
+                                             <>
+                                                <span className={`teacherName substitution`}>
+                                                   {entry.substitutionTeacher.firstName}{' '}
+                                                   {entry.substitutionTeacher.lastName}
+                                                </span>
+                                             </>
+                                          ) : (
+                                             <>
+                                                <span className={'teacherName'}>
+                                                   {entry.subjectOnTeacher.teacher.firstName}{' '}
+                                                   {entry.subjectOnTeacher.teacher.lastName}
+                                                </span>
+                                             </>
+                                          )}
+                                       </>
+                                    ) : null}
+                                 </td>
+                              )
+                           })}
+                        </tr>
+                     ))}
                   </tbody>
                </table>
             </div>
