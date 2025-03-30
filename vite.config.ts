@@ -1,11 +1,13 @@
-import { defineConfig } from 'vitest/config';  // ✅ Correct import for Vitest
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import { reactRouter } from '@react-router/dev/vite'
+import { configDefaults } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [react()],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: ['./__tests__/setupTests.ts'],
-  },
-});
+   plugins: [reactRouter()],
+   test: {
+      ...configDefaults,
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: ['./__tests__/setupTests.ts'],
+   },
+})
