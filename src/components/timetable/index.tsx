@@ -105,7 +105,6 @@ function addWeeksToDateRange(dateRange: DateRange, num_of_weeks: number): DateRa
    const end = new Date(dateRange.endDate)
    end.setDate(end.getDate() + (7 * num_of_weeks))
 
-   console.log(`${start} - ${end}`)
    return new DateRange(start, end)
 }
 
@@ -113,7 +112,6 @@ function addWeeksToDateRange(dateRange: DateRange, num_of_weeks: number): DateRa
 const Index: React.FC = () => {
 
    const [timetableData, setTimetableData] = useState<TimetableItem[] | undefined>()
-   console.log(getCurrentDateRange());
    const [dateRange] = useState(() => {
       if (
          window.location.pathname.endsWith('/dashboard/student/timetable') ||
@@ -145,7 +143,6 @@ const Index: React.FC = () => {
       })
          .then((res) => res.json())
          .then((data) => {
-            console.log('Timetable data:', data)
             if (Array.isArray(data)) {
                setTimetableData(data)
             } else {
@@ -161,7 +158,6 @@ const Index: React.FC = () => {
       return item.lessonNumber > max ? item.lessonNumber : max
    }, 0) || 0;
 
-   console.log('Max lesson number:', maxLessonNumber);
 
    const daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']
 
