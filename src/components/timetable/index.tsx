@@ -43,7 +43,7 @@ class DateRange {
    }
 
    static tryParse(dateRangeString: string): DateRange | null {
-      if (!/^\d{4}-.*;.*T.*Z$/.test(dateRangeString)) return null;
+      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(dateRangeString)) return null;
       try {
          const [start, end] = dateRangeString.split(';')
          return new DateRange(new Date(start), new Date(end))
