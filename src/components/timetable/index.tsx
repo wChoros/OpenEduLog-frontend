@@ -28,10 +28,35 @@ interface Group {
    name: string
 }
 
+
+class DateRange {
+   startDate: Date
+   endDate: Date
+
+   constructor(startDate: Date, endDate: Date) {
+      this.startDate = startDate
+      this.endDate = endDate
+   }
+
+   toString(): string {
+      return `${this.startDate.toISOString()};${this.endDate.toISOString()}`
+   }
+
+   static tryParse(dateRangeString: string): DateRange | null {
+      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(dateRangeString)) return null;
+      try {
+         const [start, end] = dateRangeString.split(';')
+         return new DateRange(new Date(start), new Date(end))
+      } catch {
+         return null
+      }
+   }
+}
+
+
 interface TimetableItem {
    id: number
-   weekNumber: number
-   weekDay: string // e.g. "MONDAY"
+   date: Date
    createdAt: string
    updatedAt: string
    group: Group
@@ -44,28 +69,63 @@ interface TimetableItem {
    substitutionTeacherId: number | null // or undefined
 }
 
-const getCurrentWeekNumber = () => {
-   const today = new Date()
-   const firstDayOfYear = new Date(today.getFullYear(), 0, 1)
-   const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000
-   return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7)
+
+function getCurrentDateRange(): DateRange {
+   const curr = new Date();
+   const day = curr.getDay();
+   const diffToMonday = day === 0 ? 6 : day - 1; // Adjust for Sunday being 0
+   const diffToSunday = day === 0 ? 0 : 7 - day; // Treat Sunday as the end date
+
+   const previousMonday = new Date(curr);
+   const nextSunday = new Date(curr);
+
+   if (day === 1) { // If it's Monday, treat it as the start date
+      previousMonday.setHours(0, 0, 0, 0); // Reset to midnight
+      nextSunday.setDate(previousMonday.getDate() + 6);
+      nextSunday.setHours(23, 59, 59, 999); // End of the week
+   } else if (day === 0) { // If it's Sunday, treat it as the end date
+      nextSunday.setHours(23, 59, 59, 999); // End of the day
+      previousMonday.setDate(nextSunday.getDate() - 6);
+      previousMonday.setHours(0, 0, 0, 0); // Start of the week
+   } else {
+      previousMonday.setDate(previousMonday.getDate() - diffToMonday);
+      previousMonday.setHours(0, 0, 0, 0); // Reset to midnight
+
+      nextSunday.setDate(nextSunday.getDate() + diffToSunday);
+      nextSunday.setHours(23, 59, 59, 999); // End of the week
+   }
+
+   return new DateRange(previousMonday, nextSunday)
 }
 
-const Index: React.FC = () => {
-   const [timetableData, setTimetableData] = useState<TimetableItem[]>([])
+function addWeeksToDateRange(dateRange: DateRange, num_of_weeks: number): DateRange {
+   const start = new Date(dateRange.startDate)
+   start.setDate(start.getDate() + (7 * num_of_weeks))
 
-   const [weekNumber] = useState(() => {
-      // If the path ends with /dashboard/student/timetable or the same with trailing slash
+   const end = new Date(dateRange.endDate)
+   end.setDate(end.getDate() + (7 * num_of_weeks))
+
+   return new DateRange(start, end)
+}
+
+
+const Index: React.FC = () => {
+
+   const [timetableData, setTimetableData] = useState<TimetableItem[] | undefined>()
+   const [dateRange] = useState(() => {
       if (
          window.location.pathname.endsWith('/dashboard/student/timetable') ||
          window.location.pathname.endsWith('/dashboard/student/timetable/')
       ) {
-         return getCurrentWeekNumber()
+         return getCurrentDateRange()
       }
 
-      // Otherwise, parse last segment
-      const weekNumberString = window.location.pathname.split('/').pop()
-      return weekNumberString ? parseInt(weekNumberString) : getCurrentWeekNumber()
+      const dateRangeString = window.location.pathname.split('/').pop()
+      if (dateRangeString == null) {
+         return getCurrentDateRange()
+      }
+      const range = DateRange.tryParse(dateRangeString)
+      return (range ? range : getCurrentDateRange())
    })
 
    useEffect(() => {
@@ -76,14 +136,13 @@ const Index: React.FC = () => {
       // @ts-ignore
       const apiUrl = import.meta.env.VITE_API_URL
 
-      fetch(`${apiUrl}/timetables/user/${userId}/${weekNumber}`, {
+      fetch(`${apiUrl}/timetables/user/${userId}/${dateRange.startDate.toISOString()}/${dateRange.endDate.toISOString()}`, {
          method: 'GET',
          headers: { 'Content-Type': 'application/json' },
          credentials: 'include',
       })
          .then((res) => res.json())
          .then((data) => {
-            console.log('Timetable data:', data)
             if (Array.isArray(data)) {
                setTimetableData(data)
             } else {
@@ -93,10 +152,14 @@ const Index: React.FC = () => {
          .catch((error) => {
             console.error('Error fetching timetable:', error)
          })
-   }, [weekNumber]) // refetch whenever weekNumber changes
+   }, [dateRange]) // refetch whenever dateRange changes
+
+   const maxLessonNumber = timetableData?.reduce((max, item) => {
+      return item.lessonNumber > max ? item.lessonNumber : max
+   }, 0) || 0;
+
 
    const daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']
-   const totalLessons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] // Hardcoded for now
 
    return (
       <section id="timetable">
@@ -104,12 +167,12 @@ const Index: React.FC = () => {
 
          <div className={'timetableContentContainer'}>
             <div className="previousWeekButton">
-               <a href={`/dashboard/student/timetable/${weekNumber - 1}`}>
+               <a href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, -1).toString()}`}>
                   <img src="/icons/arrow-left.svg" alt="previous week" />
                </a>
             </div>
             <div className="nextWeekButton">
-               <a href={`/dashboard/student/timetable/${weekNumber + 1}`}>
+               <a href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, 1).toString()}`}>
                   <img src="/icons/arrow-right.svg" alt="next week" />
                </a>
             </div>
@@ -124,44 +187,38 @@ const Index: React.FC = () => {
                      </tr>
                   </thead>
                   <tbody>
-                     {totalLessons.map((lessonNumber) => (
-                        <tr key={lessonNumber}>
-                           <td>Lesson {lessonNumber}</td>
-                           {daysOfWeek.map((day) => {
-                              const entry = timetableData.find(
+                     {Array.from({ length: maxLessonNumber }, (_, lessonIndex) => (
+                        <tr key={lessonIndex}>
+                           <td>Lesson {lessonIndex + 1}</td>
+                           {daysOfWeek.map((_, dayIndex) => {
+                              const timetableItem = timetableData?.find(
                                  (item) =>
-                                    item.weekDay === day && item.lessonNumber === lessonNumber
+                                    item.lessonNumber === lessonIndex + 1 &&
+                                    new Date(item.date).getDay() === (dayIndex === 6 ? 0 : dayIndex + 1) // Adjust for Sunday being 0
                               )
+
+                              if (!timetableItem) {
+                                 return <td key={dayIndex}></td>
+                              }
+
+                              const isCanceled = timetableItem.isCanceled
+                              const substitutionTeacher = timetableItem.substitutionTeacher
+                              const regularTeacher = timetableItem.subjectOnTeacher.teacher
+                              const subjectName = timetableItem.subjectOnTeacher.subject.name
+
                               return (
-                                 <td
-                                    key={day}
-                                    className={entry && entry.isCanceled ? 'canceled' : ''}
-                                 >
-                                    {entry ? (
-                                       <>
-                                          <span
-                                             className={`subjectName ${entry && entry.isCanceled ? 'canceled' : ''}`}
-                                          >
-                                             {entry.subjectOnTeacher.subject.name}
-                                          </span>
-                                          <br />
-                                          {entry.substitutionTeacher ? (
-                                             <>
-                                                <span className={`teacherName substitution`}>
-                                                   {entry.substitutionTeacher.firstName}{' '}
-                                                   {entry.substitutionTeacher.lastName}
-                                                </span>
-                                             </>
-                                          ) : (
-                                             <>
-                                                <span className={'teacherName'}>
-                                                   {entry.subjectOnTeacher.teacher.firstName}{' '}
-                                                   {entry.subjectOnTeacher.teacher.lastName}
-                                                </span>
-                                             </>
-                                          )}
-                                       </>
-                                    ) : null}
+                                 <td key={dayIndex} className={isCanceled ? 'canceled' : ''}>
+                                    <span className={`subjectName ${isCanceled ? 'canceled' : ''}`}>{subjectName}</span>
+                                    <br />
+                                    {substitutionTeacher ? (
+                                       <span className="teacherName substitution">
+                                          {substitutionTeacher.firstName} {substitutionTeacher.lastName}
+                                       </span>
+                                    ) : (
+                                       <span className="teacherName">
+                                          {regularTeacher.firstName} {regularTeacher.lastName}
+                                       </span>
+                                    )}
                                  </td>
                               )
                            })}
