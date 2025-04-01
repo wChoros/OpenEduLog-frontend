@@ -1,51 +1,63 @@
 @use '../../../public/styles/variables.sass'
+body
+  justify-content: center
+  align-items: center
 
 #loginForm
-  margin-top: 100px
-  margin-bottom: 100px
-  width: 500px
-  min-height: 600px
+  margin: 50px
+  width: 532px
+  height: 660px
+  min-height: 660px
+  max-width: 532px
+  min-width: 448px
   padding: 20px
   display: flex
-  flex-wrap: wrap
   flex-direction: column
-  justify-content: space-around
   align-items: center
   border-radius: 10px
-  background-color: white
+  background-color: variables.$background-light-grey
   box-shadow:  variables.$strong-shadow
-  h2
-    font-size: 40px
-    text-align: center
-    margin-bottom: 20px
+  h1
+    color: variables.$accent-dark-gray
+    letter-spacing: 2px
+    font-size: 35px
   input
     width: 90%
-    padding: 10px
-    margin-bottom: 10px
+    height: 55px
+    background: none
+    padding: 15px
+    margin-top: 10px
+    margin-bottom: 41px
     border: 1px solid variables.$accent-gray
     border-radius: 5px
     box-sizing: border-box
     &:focus
       outline: none
-      border-color: variables.$accent-light-orange
+      border-color: variables.$accent-light-teal
   button
-    width: 45%
+    width: 90%
     padding: 10px
+    margin-top: 10px
+    margin-bottom: 20px
     border-radius: 5px
-    background-color: variables.$accent-deep-orange
+    background-color: variables.$accent-deep-turquoise
     border: 1px solid variables.$accent-dark-gray
     color: #fff
     cursor: pointer
     box-sizing: border-box
     &:hover
-      background-color: variables.$accent-light-orange
-      color: variables.$accent-dark-gray
-  p.error-message
-    color: red
-    height: 50px
+      background-color: variables.$accent-dark-gray
+      color: variables.$main-white
+  p
+    color: black
+    height: 100%
+    width: 100%
     font-size: 15px
     text-align: center
-    margin: 0
-    width: 100%
-    padding: 10px
-    border-radius: 5px
+    margin-top: 32px
+    .error-message
+      display: none
+  a
+    color: black
+    &:hover
+      color: variables.$accent-light-teal

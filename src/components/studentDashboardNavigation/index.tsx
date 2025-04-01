@@ -1,19 +1,15 @@
 //@ts-ignore
 import './style.sass'
 
-interface Props {
-   studentName: string
-   schoolName: string
-}
 
-const studentDashboardNavigation = (props: Readonly<Props>) => {
+const studentDashboardNavigation = () => {
    return (
       <nav id={'studentDashboardNavigation'}>
          <header id={'studentDashboardHeader'}>
-            <img src="/logos/logo-black-horizontal.png" alt="OpenEduLog" />
-            <h2>Student's Panel</h2>
-            <h3>{props.studentName}</h3>
-            <h4>{props.schoolName}</h4>
+            <h3>Student</h3>
+            <h3>Dashboard</h3>
+            <img src="/logos/OEL_icon.png" alt="OpenEduLog" />
+
          </header>
          <div className={'navRecord'}>
             <a href={'/dashboard/student'}>
