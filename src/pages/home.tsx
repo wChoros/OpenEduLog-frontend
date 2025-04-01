@@ -11,5 +11,7 @@ export default function Page() {
          <section>{homeBanner()}</section>
          {homeFooter()}
       </>
+
+
    )
 }

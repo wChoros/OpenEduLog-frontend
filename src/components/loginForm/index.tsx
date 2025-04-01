@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // @ts-ignore
 import './style.sass'
+// @ts-ignore
+import '../../../public/styles/global-big.sass'
 
 const LoginForm = (props: Readonly<{ message: string }>) => {
    const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -19,7 +21,7 @@ const LoginForm = (props: Readonly<{ message: string }>) => {
       const data = {
          // it's either login or email in the api, so we use the same value for both depending on the input
          login: formData.get('login'),
-         email: formData.get('login'),
+         email: formData.get('email'),
          password: formData.get('password'),
       }
       try {
@@ -67,11 +69,14 @@ const LoginForm = (props: Readonly<{ message: string }>) => {
 
    return (
       <form id="loginForm" onSubmit={handleSubmit}>
-         <h2>Login</h2>
-         <input type="text" name="login" placeholder="Username or Email" required />
+         <h1 id={"title-login"}>Login</h1>
+         <input type="text" name="email" placeholder="Email" required />
+         <input type={"text"} name={"login"} placeholder={"Login"} required />
          <input type="password" name="password" placeholder="Password" required />
          <button type="submit">Login</button>
+         <p>Don't have an account? <a href={"/register"}>Create an account!</a></p>
          <p className="error-message">{errorMessage}</p>
+
       </form>
    )
 }

@@ -8,7 +8,7 @@ export default function Page(props: Readonly<{ message: string }>) {
    return (
       <>
          {navigationHeader()}
-         <section>{loginForm(props)}</section>
+         <section id={"login-main"}>{loginForm(props)}</section>
          {homeFooter()}
       </>
    )
