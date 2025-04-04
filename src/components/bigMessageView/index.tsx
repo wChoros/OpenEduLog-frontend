@@ -42,8 +42,8 @@ function formatDate(date: Date): string {
 }
 
 const Index: React.FC = () => {
-   const [messageData, setMessageData] = useState<MessageRecord[]>()
-   const [offset, setOffset] = useState(0)
+   const [messageData, setMessageData] = useState<MessageRecord[]>([])
+   const [offset, setOffset] = useState<number>(0)
 
    useEffect(() => {
       const urlParams = new URLSearchParams(window.location.search)
@@ -93,7 +93,7 @@ const Index: React.FC = () => {
                   </a>
                </div>
 
-               {messageData &&
+               {Array.isArray(messageData) &&
                   messageData.map((data, i) => (
                      <div key={i} className={`messageRecord ${data.isRead ? 'read' : 'unread'}`}>
                         <a href={`/dashboard/student/messages/${data.messageId}`}>

@@ -30,7 +30,7 @@ const Index: React.FC = () => {
       // @ts-ignore
       const apiUrl = import.meta.env.VITE_API_URL
 
-      fetch(`${apiUrl}/content/received/${messageId}/`, {
+      fetch(`${apiUrl}/messages/content/received/${messageId}/`, {
          method: 'GET',
          headers: { 'Content-Type': 'application/json' },
          credentials: 'include',
@@ -44,26 +44,59 @@ const Index: React.FC = () => {
          })
    }, [messageId])
 
+   if (!messageData) {
+      return "Error fetching data"
+   }
+
    return (
       <section id="gradeDetails">
-         <h1 className="dashboardSectionTitle">Grade Info</h1>
-         <div className="gradeDetailsContainer">
+         <h1 className="dashboardSectionTitle">Message Info</h1>
+         <div className="messageDetailsContainer">
             <header>
                <div className={'returnButton'}>
-                  <a href={'/dashboard/student/grades'}>
+                  <a href={'/dashboard/student/messages'}>
                      <img src={'/icons/close.svg'} alt={'return'} />
                   </a>
                </div>
             </header>
             <div className="messageRecord">
-               <div className="title">
-                  <h2>{messageData?.title}</h2>
+               <div className='messageField'>
+                  <div className='messageFieldName'>
+                     Subject:
+                  </div>
+                  <div className='messageFieldContent'>
+                     {messageData.title}
+                  </div>
                </div>
-               <div className="info">
-                  <p>From: {messageData?.senderName}</p>
+            </div>
+            <div className="messageRecord">
+               <div className='messageField'>
+                  <div className='messageFieldName'>
+                     Date:
+                  </div>
+                  <div className='messageFieldContent'>
+                     {new Date(messageData.date).toLocaleDateString()}
+                  </div>
                </div>
-               <div className="content">
-                  <p>{messageData?.content}</p>
+            </div>
+            <div className="messageRecord">
+               <div className='messageField'>
+                  <div className='messageFieldName'>
+                     From:
+                  </div>
+                  <div className='messageFieldContent'>
+                     {messageData.senderName}
+                  </div>
+               </div>
+            </div>
+            <div className="messageRecord">
+               <div className='messageField'>
+                  <div className='messageFieldName'>
+                     Content:
+                  </div>
+                  <div className='messageFieldContent'>
+                     {messageData.content}
+                  </div>
                </div>
             </div>
          </div>
