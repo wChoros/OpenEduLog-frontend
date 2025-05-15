@@ -66,13 +66,14 @@ const LoginForm = (props: Readonly<{ message: string }>) => {
    }
 
    return (
-      <form id="loginForm" onSubmit={handleSubmit}>
-         <h2>Login</h2>
-         <input type="text" name="login" placeholder="Username or Email" required />
-         <input type="password" name="password" placeholder="Password" required />
-         <button type="submit">Login</button>
-         <p className="error-message">{errorMessage}</p>
-      </form>
+         <form id="loginForm" onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <input type="text" name="login" placeholder="Username or Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+            <p className="error-message">{errorMessage}</p>
+         </form>
+
    )
 }
 
