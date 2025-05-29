@@ -1,47 +1,35 @@
 //@ts-ignore
 import './style.sass'
 
-interface Props {
-   studentName: string
-   schoolName: string
-}
 
-const studentDashboardNavigation = (props: Readonly<Props>) => {
+const studentDashboardNavigation = () => {
    return (
       <nav id={'studentDashboardNavigation'}>
          <header id={'studentDashboardHeader'}>
-            <img src="/logos/logo-black-horizontal.png" alt="OpenEduLog" />
-            <h2>Student's Panel</h2>
-            <h3>{props.studentName}</h3>
-            <h4>{props.schoolName}</h4>
+            <h1 className="dashboard-text">Student Dashboard</h1>
+            <img src="/logos/OEL_icon.png" alt="OpenEduLog" />
          </header>
          <div className={'navRecord'}>
-            <a href={'/dashboard/student'}>
-               <img src={'/icons/overview.svg'} alt={'overview'} />
-               <span>Overview</span>
-            </a>
-         </div>
-         <div className={'navRecord'}>
             <a href={'/dashboard/student/mail'}>
-               <img src={'/icons/mail.svg'} alt={'courses'} />
-               <span>Mail</span>
+               <img src={'/icons/mail.png'} alt={'courses'} />
+               <span>Messages</span>
             </a>
          </div>
          <div className={'navRecord'}>
             <a href={'/dashboard/student/grades'}>
-               <img src={'/icons/grades.svg'} alt={'grades'} />
+               <img src={'/icons/grades.png'} alt={'grades'} />
                <span>Grades</span>
             </a>
          </div>
          <div className={'navRecord'}>
             <a href={'/dashboard/student/timetable'}>
-               <img src={'/icons/timetable.svg'} alt={'timetable'} />
+               <img src={'/icons/timetable.png'} alt={'timetable'} />
                <span>Timetable</span>
             </a>
          </div>
          <div className={'navRecord'}>
             <a href={'/dashboard/student/attendance'}>
-               <img src={'/icons/attendance.svg'} alt={'attendance'} />
+               <img id={'attendance-icon'} src={'/icons/attendance.png'} alt={'attendance'} />
                <span>Attendance</span>
             </a>
          </div>
