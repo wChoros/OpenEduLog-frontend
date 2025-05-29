@@ -14,41 +14,20 @@
   align-items: center
   box-shadow: variables.$strong-shadow
   z-index: 100
+  background-color: variables.$accent-light-gray
 
   #studentDashboardHeader
-    width: 100%
-    height: auto
     display: flex
     align-items: center
-    justify-content: space-evenly
-    flex-direction: column
-    text-align: center
-    border-bottom: 1px solid black
+    justify-content: center
+
+    h1
+      font-size: 1.5rem
+      color: white
+      width: 50%
 
     img
-      width: 90%
-      max-height: 50%
-      margin-bottom: 20px
-
-    h2
-      font-weight: normal
-      font-size: 35px
-      margin: 0
-
-
-    h3
-      font-size: 25px
-      margin: 0
-      font-weight: lighter
-      color: black
-
-    h4
-      font-weight: lighter
-      font-size: 15px
-      color: variables.$accent-dark-gray
-
-  .navRecord:not(:last-child)
-    border-bottom: 1px solid black
+      height: 51px
 
   .navRecord
     width: 100%
@@ -64,7 +43,7 @@
       width: 100%
       height: 100%
       display: flex
-      color: black
+      color: white
       transition: 0.3s
 
       &:hover
@@ -75,6 +54,9 @@
         max-width: 50%
         max-height: 50%
         margin-left: 20px
+
+      #attendance-icon
+        margin-left: 25px
 
       span
         font-size: 17px

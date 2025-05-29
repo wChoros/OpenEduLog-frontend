@@ -1,0 +1,82 @@
+.timetable
+  display: flex
+  justify-content: center
+  font-family: sans-serif
+  font-size: 14px
+
+  @media (max-width: 768px)
+    flex-direction: row
+    align-items: center
+
+.column
+  display: flex
+  flex-direction: column
+  flex: 1
+  border-left: 1px solid #ccc
+  min-width: 120px
+
+  @media (max-width: 768px)
+    .column:not(.current-day)
+      display: none
+    min-width: 100%
+
+.column.time
+  width: 60px
+  min-width: 60px
+  background: #fff
+  border-left: none
+
+  @media (max-width: 768px)
+    width: 100%
+    min-width: 100%
+
+.cell
+  height: 40px
+  padding: 6px
+  display: flex
+  align-items: center
+  justify-content: center
+
+.cell.time
+  background: #fff
+  font-weight: bold
+  color: #666
+  justify-content: flex-start
+  padding-left: 8px
+
+.cell.header
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  background: #fff
+  font-weight: bold
+  color: #333
+  height: 40px
+
+.text-wrapper
+  font-size: 12px
+  color: #666
+
+.date
+  font-size: 16px
+  font-weight: bold
+
+.cell.canceled
+  background: #f8d7da
+  color: #721c24
+
+.subjectName
+  font-weight: bold
+
+.subjectName.canceled
+  text-decoration: line-through
+
+.teacherName
+  font-size: 12px
+  color: #444
+
+.teacherName.substitution
+  color: #d97706
+
+.cell:not(.header):not(.time):not(.canceled):has(.subjectName)
+  background: #e5e7eb
