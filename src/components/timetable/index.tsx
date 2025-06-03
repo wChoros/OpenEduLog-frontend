@@ -28,7 +28,6 @@ interface Group {
    name: string
 }
 
-
 class DateRange {
    startDate: Date
    endDate: Date
@@ -43,7 +42,12 @@ class DateRange {
    }
 
    static tryParse(dateRangeString: string): DateRange | null {
-      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(dateRangeString)) return null;
+      if (
+         !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(
+            dateRangeString
+         )
+      )
+         return null
       try {
          const [start, end] = dateRangeString.split(';')
          return new DateRange(new Date(start), new Date(end))
@@ -52,7 +56,6 @@ class DateRange {
       }
    }
 }
-
 
 interface TimetableItem {
    id: number
@@ -69,30 +72,31 @@ interface TimetableItem {
    substitutionTeacherId: number | null // or undefined
 }
 
-
 function getCurrentDateRange(): DateRange {
-   const curr = new Date();
-   const day = curr.getDay();
-   const diffToMonday = day === 0 ? 6 : day - 1; // Adjust for Sunday being 0
-   const diffToSunday = day === 0 ? 0 : 7 - day; // Treat Sunday as the end date
+   const curr = new Date()
+   const day = curr.getDay()
+   const diffToMonday = day === 0 ? 6 : day - 1 // Adjust for Sunday being 0
+   const diffToSunday = day === 0 ? 0 : 7 - day // Treat Sunday as the end date
 
-   const previousMonday = new Date(curr);
-   const nextSunday = new Date(curr);
+   const previousMonday = new Date(curr)
+   const nextSunday = new Date(curr)
 
-   if (day === 1) { // If it's Monday, treat it as the start date
-      previousMonday.setHours(0, 0, 0, 0); // Reset to midnight
-      nextSunday.setDate(previousMonday.getDate() + 6);
-      nextSunday.setHours(23, 59, 59, 999); // End of the week
-   } else if (day === 0) { // If it's Sunday, treat it as the end date
-      nextSunday.setHours(23, 59, 59, 999); // End of the day
-      previousMonday.setDate(nextSunday.getDate() - 6);
-      previousMonday.setHours(0, 0, 0, 0); // Start of the week
+   if (day === 1) {
+      // If it's Monday, treat it as the start date
+      previousMonday.setHours(0, 0, 0, 0) // Reset to midnight
+      nextSunday.setDate(previousMonday.getDate() + 6)
+      nextSunday.setHours(23, 59, 59, 999) // End of the week
+   } else if (day === 0) {
+      // If it's Sunday, treat it as the end date
+      nextSunday.setHours(23, 59, 59, 999) // End of the day
+      previousMonday.setDate(nextSunday.getDate() - 6)
+      previousMonday.setHours(0, 0, 0, 0) // Start of the week
    } else {
-      previousMonday.setDate(previousMonday.getDate() - diffToMonday);
-      previousMonday.setHours(0, 0, 0, 0); // Reset to midnight
+      previousMonday.setDate(previousMonday.getDate() - diffToMonday)
+      previousMonday.setHours(0, 0, 0, 0) // Reset to midnight
 
-      nextSunday.setDate(nextSunday.getDate() + diffToSunday);
-      nextSunday.setHours(23, 59, 59, 999); // End of the week
+      nextSunday.setDate(nextSunday.getDate() + diffToSunday)
+      nextSunday.setHours(23, 59, 59, 999) // End of the week
    }
 
    return new DateRange(previousMonday, nextSunday)
@@ -100,17 +104,15 @@ function getCurrentDateRange(): DateRange {
 
 function addWeeksToDateRange(dateRange: DateRange, num_of_weeks: number): DateRange {
    const start = new Date(dateRange.startDate)
-   start.setDate(start.getDate() + (7 * num_of_weeks))
+   start.setDate(start.getDate() + 7 * num_of_weeks)
 
    const end = new Date(dateRange.endDate)
-   end.setDate(end.getDate() + (7 * num_of_weeks))
+   end.setDate(end.getDate() + 7 * num_of_weeks)
 
    return new DateRange(start, end)
 }
 
-
 const Index: React.FC = () => {
-
    const [timetableData, setTimetableData] = useState<TimetableItem[] | undefined>()
    const [dateRange] = useState(() => {
       if (
@@ -125,7 +127,7 @@ const Index: React.FC = () => {
          return getCurrentDateRange()
       }
       const range = DateRange.tryParse(dateRangeString)
-      return (range ? range : getCurrentDateRange())
+      return range ? range : getCurrentDateRange()
    })
 
    useEffect(() => {
@@ -136,11 +138,14 @@ const Index: React.FC = () => {
       // @ts-ignore
       const apiUrl = import.meta.env.VITE_API_URL
 
-      fetch(`${apiUrl}/timetables/user/${userId}/${dateRange.startDate.toISOString()}/${dateRange.endDate.toISOString()}`, {
-         method: 'GET',
-         headers: { 'Content-Type': 'application/json' },
-         credentials: 'include',
-      })
+      fetch(
+         `${apiUrl}/timetables/user/${userId}/${dateRange.startDate.toISOString()}/${dateRange.endDate.toISOString()}`,
+         {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+         }
+      )
          .then((res) => res.json())
          .then((data) => {
             if (Array.isArray(data)) {
@@ -154,12 +159,14 @@ const Index: React.FC = () => {
          })
    }, [dateRange]) // refetch whenever dateRange changes
 
-   const maxLessonNumber = timetableData?.reduce((max, item) => {
-      return item.lessonNumber > max ? item.lessonNumber : max
-   }, 0) || 0;
-
+   const maxLessonNumber =
+      timetableData?.reduce((max, item) => {
+         return item.lessonNumber > max ? item.lessonNumber : max
+      }, 0) || 0
 
    const daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']
+
+   // TODO: add a date indicator of the current week range at the top @rKasperaszek
 
    return (
       <section id="timetable">
@@ -167,12 +174,16 @@ const Index: React.FC = () => {
 
          <div className={'timetableContentContainer'}>
             <div className="previousWeekButton">
-               <a href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, -1).toString()}`}>
+               <a
+                  href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, -1).toString()}`}
+               >
                   <img src="/icons/arrow-left.svg" alt="previous week" />
                </a>
             </div>
             <div className="nextWeekButton">
-               <a href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, 1).toString()}`}>
+               <a
+                  href={`/dashboard/student/timetable/${addWeeksToDateRange(dateRange, 1).toString()}`}
+               >
                   <img src="/icons/arrow-right.svg" alt="next week" />
                </a>
             </div>
@@ -194,7 +205,8 @@ const Index: React.FC = () => {
                               const timetableItem = timetableData?.find(
                                  (item) =>
                                     item.lessonNumber === lessonIndex + 1 &&
-                                    new Date(item.date).getDay() === (dayIndex === 6 ? 0 : dayIndex + 1) // Adjust for Sunday being 0
+                                    new Date(item.date).getDay() ===
+                                       (dayIndex === 6 ? 0 : dayIndex + 1) // Adjust for Sunday being 0
                               )
 
                               if (!timetableItem) {
@@ -208,11 +220,14 @@ const Index: React.FC = () => {
 
                               return (
                                  <td key={dayIndex} className={isCanceled ? 'canceled' : ''}>
-                                    <span className={`subjectName ${isCanceled ? 'canceled' : ''}`}>{subjectName}</span>
+                                    <span className={`subjectName ${isCanceled ? 'canceled' : ''}`}>
+                                       {subjectName}
+                                    </span>
                                     <br />
                                     {substitutionTeacher ? (
                                        <span className="teacherName substitution">
-                                          {substitutionTeacher.firstName} {substitutionTeacher.lastName}
+                                          {substitutionTeacher.firstName}{' '}
+                                          {substitutionTeacher.lastName}
                                        </span>
                                     ) : (
                                        <span className="teacherName">

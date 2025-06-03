@@ -7,7 +7,10 @@ export default [
    route('register', 'pages/register.tsx'),
    route('/dashboard/student', 'pages/studentDashboard/index.tsx', [
       index('pages/studentDashboard/overview.tsx'),
-      route('mail', 'pages/studentDashboard/mail.tsx'),
+      route('messages', 'pages/studentDashboard/messages.tsx', [
+         index('components/bigMessageView/index.tsx'),
+         route(':messageId', 'components/messageDetails/index.tsx'),
+      ]),
       route('timetable/:weekNumber?', 'pages/studentDashboard/timetable.tsx'),
       route('grades', 'pages/studentDashboard/grades.tsx', [
          index('components/bigGradesView/index.tsx'),
