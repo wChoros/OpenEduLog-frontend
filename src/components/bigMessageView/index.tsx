@@ -60,8 +60,7 @@ const Index: React.FC = () => {
       // if current offset is 0, disable left button
       if (currentOffset <= 0) {
          setPreviousButton(false)
-      }
-      else{
+      } else {
          setPreviousButton(true)
       }
 
@@ -86,8 +85,7 @@ const Index: React.FC = () => {
             .then((data) => {
                if (data.length < 20) {
                   setNextButton(false)
-               }
-               else {
+               } else {
                   setNextButton(true)
                }
                setMessageData(data)

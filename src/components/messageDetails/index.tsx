@@ -45,7 +45,7 @@ const Index: React.FC = () => {
    }, [messageId])
 
    if (!messageData) {
-      return "Error fetching data"
+      return 'Error fetching data'
    }
 
    return (
@@ -60,43 +60,29 @@ const Index: React.FC = () => {
                </div>
             </header>
             <div className="messageRecord">
-               <div className='messageField'>
-                  <div className='messageFieldName'>
-                     Subject:
-                  </div>
-                  <div className='messageFieldContent'>
-                     {messageData.title}
-                  </div>
+               <div className="messageField">
+                  <div className="messageFieldName">Subject:</div>
+                  <div className="messageFieldContent">{messageData.title}</div>
                </div>
             </div>
             <div className="messageRecord">
-               <div className='messageField'>
-                  <div className='messageFieldName'>
-                     Date:
-                  </div>
-                  <div className='messageFieldContent'>
+               <div className="messageField">
+                  <div className="messageFieldName">Date:</div>
+                  <div className="messageFieldContent">
                      {new Date(messageData.date).toLocaleDateString()}
                   </div>
                </div>
             </div>
             <div className="messageRecord">
-               <div className='messageField'>
-                  <div className='messageFieldName'>
-                     From:
-                  </div>
-                  <div className='messageFieldContent'>
-                     {messageData.senderName}
-                  </div>
+               <div className="messageField">
+                  <div className="messageFieldName">From:</div>
+                  <div className="messageFieldContent">{messageData.senderName}</div>
                </div>
             </div>
             <div className="messageRecord">
-               <div className='messageField'>
-                  <div className='messageFieldName'>
-                     Content:
-                  </div>
-                  <div className='messageFieldContent'>
-                     {messageData.content}
-                  </div>
+               <div className="messageField">
+                  <div className="messageFieldName">Content:</div>
+                  <div className="messageFieldContent">{messageData.content}</div>
                </div>
             </div>
          </div>
