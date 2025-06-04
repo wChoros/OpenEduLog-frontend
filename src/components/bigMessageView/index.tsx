@@ -1,146 +1,137 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react';
 //@ts-ignore
-import './style.sass'
+import './style.sass'; // Assuming you have this file for styling
 
 interface MessageRecord {
-   messageId: number
-   messageTitle: string
-   messageContent: string
-   date: Date
-   isRead: boolean
-   senderId: number
-   senderName: string
+   messageId: number;
+   messageTitle: string;
+   messageContent: string;
+   date: Date;
+   isRead: boolean;
+   senderId: number;
+   senderName: string;
 }
 
+// Helper function to format dates (remains unchanged)
 function formatDate(date: Date): string {
-   const today = new Date(Date.now())
+   const today = new Date(); // Use current date for comparison
    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-   ]
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+   ];
    if (
       date.getFullYear() === today.getFullYear() &&
       date.getMonth() === today.getMonth() &&
-      date.getDate() == today.getDate()
+      date.getDate() === today.getDate()
    ) {
-      return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+      return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
    } else {
-      return `${date.getDate()} ${months[date.getMonth()]}`
+      return `${date.getDate()} ${months[date.getMonth()]}`;
    }
 }
 
+// Placeholder data for 5 messages
+const placeholderMessages: MessageRecord[] = [
+  {
+    messageId: 1001,
+    messageTitle: "Welcome to Your Inbox!",
+    messageContent: "This is a sample message to show how messages will appear.",
+    date: new Date(Date.now() - 86400000 * 2), // 2 days ago
+    isRead: false,
+    senderId: 1,
+    senderName: "System Admin",
+  },
+  {
+    messageId: 1002,
+    messageTitle: "Reminder: Upcoming Event",
+    messageContent: "Don't forget about the webinar scheduled for tomorrow at 2 PM.",
+    date: new Date(Date.now() - 3600000 * 5), // 5 hours ago
+    isRead: true,
+    senderId: 2,
+    senderName: "Event Coordinator",
+  },
+  {
+    messageId: 1003,
+    messageTitle: "Project Update: Alpha Phase",
+    messageContent: "The alpha phase of Project Phoenix is now complete. Feedback is welcome.",
+    date: new Date(), // Today
+    isRead: false,
+    senderId: 3,
+    senderName: "John Doe",
+  },
+  {
+    messageId: 1004,
+    messageTitle: "Your Weekly Newsletter",
+    messageContent: "Check out the latest articles and updates in this week's newsletter.",
+    date: new Date(Date.now() - 86400000 * 1), // 1 day ago
+    isRead: true,
+    senderId: 4,
+    senderName: "Newsletter Team",
+  },
+  {
+    messageId: 1005,
+    messageTitle: "Quick Question about your Account",
+    messageContent: "Could you please confirm your recent activity? No action needed if this was you.",
+    date: new Date(Date.now() - 3600000 * 1), // 1 hour ago
+    isRead: false,
+    senderId: 5,
+    senderName: "Support Bot",
+  },
+];
+
 const Index: React.FC = () => {
-   const [messageData, setMessageData] = useState<MessageRecord[]>([])
-   const [offset, setOffset] = useState<number>(0)
-   const [previousButton, setPreviousButton] = useState<boolean>(true)
-   const [nextButton, setNextButton] = useState<boolean>(true)
+   // Initialize state with placeholder messages
+   const [messageData, setMessageData] = useState<MessageRecord[]>(placeholderMessages);
 
-   // Combine both useEffect hooks into one to avoid dependency issues
-   useEffect(() => {
-      // Get offset from URL params
-      const urlParams = new URLSearchParams(window.location.search)
-      const offsetParam = urlParams.get('offset')
-      const currentOffset = offsetParam ? parseInt(offsetParam) : 0
-
-      // Only update offset state if it's different
-      if (currentOffset !== offset) {
-         setOffset(currentOffset)
-      }
-
-      // if current offset is 0, disable left button
-      if (currentOffset <= 0) {
-         setPreviousButton(false)
-      } else {
-         setPreviousButton(true)
-      }
-
-      // Get userId from cookie
-      const userIdCookie = document.cookie.split('; ').find((row) => row.startsWith('user_id='))
-      const userId = userIdCookie ? userIdCookie.split('=')[1] : null
-
-      // @ts-ignore
-      const apiUrl = import.meta.env.VITE_API_URL
-
-      // Only fetch if we have a userId
-      if (userId) {
-         fetch(`${apiUrl}/messages/headers/received/${userId}/${currentOffset}`, {
-            method: 'GET',
-            headers: {
-               'Content-Type': 'application/json',
-               'Cache-Control': 'no-cache',
-            },
-            credentials: 'include',
-         })
-            .then((res) => res.json())
-            .then((data) => {
-               if (data.length < 20) {
-                  setNextButton(false)
-               } else {
-                  setNextButton(true)
-               }
-               setMessageData(data)
-            })
-            .catch((error) => {
-               console.error('Error fetching messages:', error)
-            })
-      }
-   }, [window.location.search]) // Only depend on URL changes
-
-   const handlePagination = (newOffset: number) => {
-      // Prevent negative offsets
-      const validOffset = newOffset < 0 ? 0 : newOffset
-      window.location.href = `/dashboard/student/messages?offset=${validOffset}`
-   }
+   // Data fetching and pagination logic have been removed.
+   // useEffect hook is no longer needed for fetching.
+   // offset, previousButton, nextButton states are removed.
+   // handlePagination function is removed.
 
    return (
       <>
          <section id="bigMessageView">
             <h1 className="dashboardSectionTitle">Messages</h1>
             <div className="messageContainer">
-               <div className="navigation">
-                  <button
-                     onClick={() => handlePagination(offset - 20)}
-                     className={`paginationButton ${!previousButton ? 'hidden' : ''}`}
-                  >
+               {/* Pagination buttons are removed as they are not functional with static data */}
+               {/* <div className="navigation">
+                  <button className="paginationButton">
                      <img src="/icons/arrow-left.svg" alt="previous page" />
                   </button>
-                  <button
-                     onClick={() => handlePagination(offset + 20)}
-                     className={`paginationButton ${!nextButton ? 'hidden' : ''}`}
-                  >
+                  <button className="paginationButton">
                      <img src="/icons/arrow-right.svg" alt="next page" />
                   </button>
                </div>
+               */}
+
+               {/* Render messages from the placeholder data */}
                {Array.isArray(messageData) && messageData.length > 0 ? (
-                  messageData.map((data, i) => (
-                     <div key={i} className={`messageRecord ${data.isRead ? 'read' : 'unread'}`}>
+                  messageData.map((data) => ( // Changed 'i' to 'data.messageId' for a more stable key
+                     <div key={data.messageId} className={`messageRecord ${data.isRead ? 'read' : 'unread'}`}>
+                        {/* The href should ideally lead to a dynamic route if you plan to implement
+                           individual message views later. For now, it's a placeholder.
+                        */}
                         <a href={`/dashboard/student/messages/${data.messageId}`}>
-                           <div className="messageAuthor">{data.senderName || 'John Doe'}</div>
-                           <div className="messageContent">
+                           <div className="messageAuthor">{data.senderName}</div>
+                           <div className="messageContentWrapper"> {/* Added a wrapper for clarity if needed */}
                               <div className="messageTitle">{data.messageTitle}</div>
-                              <div className="messageContent">{data.messageContent}</div>
+                              {/* The original code had 'messageContent' div nested within another 'messageContent' div.
+                                 Corrected to avoid confusion, assuming the inner one is the actual text.
+                              */}
+                              <div className="messageActualContent">{data.messageContent}</div>
                            </div>
                            <div className="messageDate">{formatDate(new Date(data.date))}</div>
                         </a>
                      </div>
                   ))
                ) : (
+                  // This part will not be reached if placeholderMessages is always populated
                   <div className="noMessages">No messages to display</div>
                )}
             </div>
          </section>
       </>
-   )
-}
+   );
+};
 
-export default Index
+export default Index;
